@@ -5,8 +5,12 @@ from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
 from google.protobuf.json_format import MessageToJson
 
-
 from controllers import rpc_calls
+from pydantic import BaseModel
+
+class Date(BaseModel):
+    date: dict
+
 
 logger = logging.getLogger()
 
@@ -28,6 +32,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+async def root():
+    return {"message": "running AmiVerse API"}
 
 
 @app.get("/classSchedule")

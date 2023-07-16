@@ -31,3 +31,12 @@ The server runs on port 8000 by default. username and password must be passed as
 ```shell
 localhost:8000?username=<username>&password=<password>
 ```
+
+## Using a separate port
+
+You can specify which port to use by adding ``--port <PORT>`` at the end of the dev command in makefile:
+
+```makefile
+dev:
+	poetry run uvicorn main:app --reload --port 3030
+````

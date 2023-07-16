@@ -26,7 +26,7 @@ logger = logging.getLogger()
 
 @app.get("/")
 async def root():
-    return {"message": "running AmiVerse API"}
+    return {"message": "AmiVerse API running"}
 
 
 @app.get("/classSchedule")

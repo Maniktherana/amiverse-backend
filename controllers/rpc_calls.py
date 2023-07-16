@@ -28,7 +28,7 @@ async def get_class_schedule(username, password: int) -> pb.ScheduledClasses | N
     stub, metadata, channel = stubber(username, password)
 
     today = date.today()
-    val = _date_pb2.Date(year=today.year, month=today.month, day=4)
+    val = _date_pb2.Date(year=today.year, month=today.month, day=today.day)
 
     try:
         logger.info("Getting class schedule via grpc")

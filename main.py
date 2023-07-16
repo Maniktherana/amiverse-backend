@@ -8,27 +8,21 @@ from google.protobuf.json_format import MessageToJson
 from controllers import rpc_calls
 from pydantic import BaseModel
 
-class Date(BaseModel):
-    date: dict
-
-
-logger = logging.getLogger()
 
 app = FastAPI()
 
-origins = [
-    "http://localhost",
-    "http://localhost:8080",
-    "http://localhost:3000”,
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+class Date(BaseModel):
+    date: dict
+
+logger = logging.getLogger()
 
 @app.get("/")
 async def root():

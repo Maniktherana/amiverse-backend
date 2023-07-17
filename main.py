@@ -50,6 +50,20 @@ async def get_current_course(username, password):
     json_data= MessageToJson(res)
     return Response(content=json_data, media_type="application/json")
 
+@app.get("/courses")
+async def get_courses_by_sem(username, password, semester):
+    print("Getting user profile", username, password, semester)
+    res = await rpc_calls.get_courses(username, password, semester)
+    json_data= MessageToJson(res)
+    return Response(content=json_data, media_type="application/json")
+
+@app.get("/semesters")
+async def get_semesters(username, password):
+    print("Getting user profile", username, password)
+    res = await rpc_calls.get_semesters(username, password)
+    json_data= MessageToJson(res)
+    return Response(content=json_data, media_type="application/json")
+
 @app.get("/attendance")
 async def get_attendance(username, password):
     print("Getting user profile", username, password)

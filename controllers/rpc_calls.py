@@ -41,6 +41,18 @@ async def get_class_schedule(username, password: int) -> pb.ScheduledClasses | N
         return None
     finally:
         await channel.close()
+        
+        
+async def get_semesters(username, password: int) -> pb.SemesterList | None:
+    stub, metadata, channel = stubber(username, password)
+    try:
+        logger.info("Getting current course via grpc")
+        response = await stub.GetSemesters(pb.EmptyMessage, metadata=metadata)
+        return response
+    except Exception as e:
+        return None
+    finally:
+        await channel.close()
 
 
 async def get_current_course(username, password: int) -> pb.Courses | None:
@@ -50,6 +62,19 @@ async def get_current_course(username, password: int) -> pb.Courses | None:
         response = await stub.GetCurrentCourses(pb.EmptyMessage(), metadata=metadata)
         return response
     except Exception as e:
+        return None
+    finally:
+        await channel.close()
+        
+
+async def get_courses(username, password, semester: int) -> pb.Courses | None:
+    stub, metadata, channel = stubber(username, password)
+    try:
+        logger.info("Getting current course via grpc")
+        response = await stub.GetCourses(pb.SemesterRef(semester_ref=semester), metadata=metadata)
+        return response
+    except Exception as e:
+        print(e)
         return None
     finally:
         await channel.close()

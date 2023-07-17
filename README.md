@@ -38,5 +38,5 @@ You can specify which port to use by adding ``--port <PORT>`` at the end of the 
 
 ```makefile
 dev:
-	poetry run uvicorn main:app --reload --port 3030
-````
+    poetry run uvicorn main:app --reload --port 3030
+```

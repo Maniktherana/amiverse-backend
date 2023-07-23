@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "server"
+name = "AmiVerse Backend"
 version = "0.1.0"
 description = "AmiVerse Backend"
 authors = ["Manik Rana <manikrana54@gmail.com>"]

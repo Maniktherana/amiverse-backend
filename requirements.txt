@@ -1,0 +1,8 @@
+fastapi
+google-api-python-client
+grpc-gateway-protoc-gen-openapiv2
+grpcio
+protobuf
+python
+toml-to-requirements
+uvicorn

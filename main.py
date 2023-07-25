@@ -1,7 +1,7 @@
 import logging
-from typing import Union
+from datetime import datetime
 
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from google.protobuf.json_format import MessageToJson
 
@@ -23,11 +23,30 @@ class Date(BaseModel):
     date: dict
 
 logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+# Create a custom logging format
+log_format = '%(asctime)s - %(levelname)s: %(message)s'
+
+# Create a StreamHandler and set the log format
+stream_handler = logging.StreamHandler()
+stream_handler.setFormatter(logging.Formatter(log_format))
+
+# Add the StreamHandler to the logger
+logger.addHandler(stream_handler)
 
 @app.get("/")
 async def root():
+    request_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    logger.info(f"Request at {request_time}: AmiVerse API running")
     return {"message": "AmiVerse API running"}
 
+@app.middleware("http")
+async def log_request(request: Request, call_next):
+    request_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    logger.info(f"Request at {request_time}: {request.method} {request.url}")
+    response = await call_next(request)
+    return response
 
 @app.get("/classSchedule")
 async def get_class_schedule(username, password):

@@ -1,5 +1,7 @@
 # AmiVerse Backend
 
+This is backend for the [AmiVerse](https://github.com/Maniktherana/AmiVerse) app. It is written in Python using FastAPI and acts as a gRPC consumer of [go-amizone](https://github.com/ditsuke/go-amizone)
+
 ## Installing dependencies
 
 1. Install Python dependencies:
